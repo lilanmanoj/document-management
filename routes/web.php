@@ -22,3 +22,13 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::group([
+    'middleware' => ['auth:sanctum', 'verified'],
+    'prefix' => 'files',
+    'as' => 'files.',
+    'namespace' => 'App\Http\Controllers\Modules',
+], function () {
+    Route::get('upload', 'FileController@create')->name('upload');
+    Route::get('index', 'FileController@index')->name('index');
+});
