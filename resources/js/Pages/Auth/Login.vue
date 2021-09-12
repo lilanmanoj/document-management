@@ -23,18 +23,29 @@
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
             </div>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <jet-checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
-                </label>
+            <div class="block overflow-hidden mt-4 w-full">
+                <div class="block overflow-hidden float-left w-full sm:w-1/2 mb-4">
+                    <label class="flex items-center">
+                        <jet-checkbox name="remember" v-model:checked="form.remember" />
+                        <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                    </label>
+                </div>
+
+                <div class="block overflow-hidden float-left w-full text-left sm:w-1/2 mb-4 sm:text-right">
+                    <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                        Forgot your password?
+                    </Link>
+                </div>
+            </div>
+            
+            <div class="block w-full overflow-hidden mt-4 text-left">
+                <span class="text-sm text-gray-600">If you are not already registered </span>
+                <Link v-if="canResetPassword" :href="route('register')" class="underline text-sm text-blue-600 hover:text-blue-900">
+                    join now
+                </Link>
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
-                </Link>
-
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </jet-button>
